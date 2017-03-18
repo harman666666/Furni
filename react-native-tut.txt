@@ -1,0 +1,16 @@
+Quick Setup
+To have NativeBase components running onto your native apps, all you need to 
+do is create a fresh React Native project and install the NativeBase command line tools.
+
+Create React Native project
+react-native init AwesomeNativeBase
+cd AwesomeNativeBase
+
+Install NativeBase
+npm install native-base --save
+
+Install Peer Dependencies
+The peer dependencies included from any npm packages does not 
+automatically get installed. Your application will not depend on it explicitly.
+
+react-native link => To link back to phone stuff
