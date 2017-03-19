@@ -1,12 +1,14 @@
 import {
   AppRegistry,
+  Button,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {Col, Grid, Row} from 'react-native-elements';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import Camera from 'react-native-camera';
 
@@ -22,14 +24,64 @@ export default class Furni extends Component {
   }
 }
 class Content extends Component {
+  static propTypes = {
+    press: PropTypes.func,
+    text: PropTypes.string,
+  };
+
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <View style={[styles.contentFlex, styles.flexRow]}>
-        <Text style={styles.headerText}> Fook </Text>
+      <List width={"80%"}> 
+        <ListItem text="fook" onPress={() => console.log("Fick")}> </ListItem>
+      </List>
       </View>
     );
   }
 }
+class List extends Component {
+  static propTypes= {
+    width: PropTypes.string.isRequired,
+  }
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return (
+    <View style={{width: this.props.width}}>
+      {this.props.children}
+    </View> 
+    );
+  }
+}
+  
+class ListItem extends Component {
+  static propTypes = {
+    onPress: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+  }
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    const {
+      onPress,
+      text,
+      width,
+    } = this.props;
+return (
+    <View style={[styles.contentButton]}>
+      <Text style={{textAlign: "center", fontFamily: "Arial", top: "20%"}}>{text}</Text>
+    </View> 
+)
+  }
+}
+
 class Header extends Component {
   render() {
     return (
@@ -117,6 +169,13 @@ const styles = StyleSheet.create({
   },
   contentFlex: {
     flex: 10,
+  },
+  contentButton: {
+    backgroundColor: "red",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderRadius: 12,
+    height: "5%",
   }
 
 });
