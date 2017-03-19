@@ -11,18 +11,66 @@ import {Icon, Tab, Tabs} from 'react-native-elements';
 import React, { Component, PropTypes } from 'react';
 
 import Camera from 'react-native-camera';
+import {
+  StackNavigator,
+} from 'react-navigation';
 
-export default class Furni extends Component {
+class Layout extends Component {
   render() {
     return (
       <View style={[styles.background, styles.size, styles.flexCol]}>
             <Header />
-            <Content />
+            {this.props.children}
             <Footer />
       </View>
     );
   }
 }
+
+class ClearLayout extends Component {
+  render() {
+    return (
+      <View style={[styles.background, styles.size, styles.flexCol]}>
+            {this.props.children}
+      </View>
+    );
+  }
+}
+
+class MainScreen extends Component {
+  constructor(props){
+    super(props);
+  }
+  static navigationOptions = {
+    title: 'Main',
+    header: ({state, setParams}) => ({
+      visibile: false,
+    })
+  };
+
+  render() {
+    return(
+      <Layout>
+        <Content navigation={this.props.navigation}/>
+      </Layout>
+    );
+  }
+}
+
+class CameraScreen extends Component {
+  static navigationOptions = {
+    title: 'Camera',
+  };
+    
+  render() {
+    return (
+      <ClearLayout>
+        <Text> Camera </Text>
+      </ClearLayout>
+    );
+  }
+}
+
 class Content extends Component {
   static propTypes = {
     press: PropTypes.func,
@@ -34,10 +82,13 @@ class Content extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
+      console.log(navigate);
     return (
       <View style={[styles.contentFlex, styles.flexRow]}>
       <List style={{width:"80%", marginLeft: "10%"}}> 
-        <ListItem text="Analyze Room" onPress={() => console.log("Fick")}> </ListItem>
+        <ListItem text="Analyze Room" onPress={() => navigate('Camera', { name: 'Fook' })}> </ListItem>
         <ListItem text="Find Cool Furniture" onPress={() => console.log("Fick")}> </ListItem>
       </List>
       </View>
@@ -196,6 +247,11 @@ render() {
 }
 
 
+const App = StackNavigator({
+  Main: {screen: MainScreen},
+  Camera: {screen: CameraScreen},
+ });
+
 
 const styles = StyleSheet.create({
   container: {
@@ -258,4 +314,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Furni', () => Furni);
+AppRegistry.registerComponent('Furni', () => App);
