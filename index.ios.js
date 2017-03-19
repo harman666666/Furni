@@ -59,26 +59,64 @@ class List extends Component {
   }
 }
   
+  ListItemStyles = StyleSheet.create({
+    touchedListItem: {
+      shadowColor: "black",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowRadius: 5,
+      shadowOpacity: 0.75,
+    },
+    
+    listItem: {
+      backgroundColor: "red",
+      borderColor: "black",
+      borderStyle: "solid",
+      borderRadius: 12,
+      height: "5%",
+    },
+  });
+
 class ListItem extends Component {
   static propTypes = {
     onPress: PropTypes.func.isRequired,
     text: PropTypes.string.isRequired,
   }
+
+  
+
   constructor(props){
     super(props);
+    this.touchStart = this.touchStart.bind(this);
+    this.touchEnd = this.touchEnd.bind(this);
+    this.state = {currentStyles : [ListItemStyles.listItem]}
+  }
+  
+
+  touchStart() {
+    this.setState({currentStyles: [ListItemStyles.listItem, ListItemStyles.touchedListItem]});
   }
 
-  render(){
+  touchEnd() {
+    this.setState({currentStyles: [ListItemStyles.listItem]});
+  }
+
+  render() {
     const {
       onPress,
       text,
       width,
     } = this.props;
+    
+    console.log(this.state.currentStyles);
+
 return (
-    <View style={[styles.contentButton]}>
+    <View style={this.state.currentStyles} onTouchStart={this.touchStart} onTouchEnd={this.touchEnd}>
       <Text style={{textAlign: "center", fontFamily: "Arial", top: "20%"}}>{text}</Text>
     </View> 
-)
+);
   }
 }
 
@@ -170,14 +208,6 @@ const styles = StyleSheet.create({
   contentFlex: {
     flex: 10,
   },
-  contentButton: {
-    backgroundColor: "red",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderRadius: 12,
-    height: "5%",
-  }
-
 });
 
 AppRegistry.registerComponent('Furni', () => Furni);
