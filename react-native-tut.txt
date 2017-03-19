@@ -14,3 +14,13 @@ The peer dependencies included from any npm packages does not
 automatically get installed. Your application will not depend on it explicitly.
 
 react-native link => To link back to phone stuff
+
+Tools & Key Packages
+Sublime Text 3
+Xcode 7.3.1
+React Native 0.25.1
+react-native-motion-manager
+react-native-video
+react-native-sound
+react-native-animatable
+react-native-camera

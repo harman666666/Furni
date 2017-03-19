@@ -2,57 +2,57 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
-import {
-  Body,
-  Button,
-  Container,
-  Content,
-  Footer,
-  FooterTab,
-  Header,
-  Icon,
-  Left,
-  Right,
-  Title,
-} from 'native-base';
+import {Col, Grid, Row} from 'react-native-elements';
 import React, { Component } from 'react';
+
+import Camera from 'react-native-camera';
 
 export default class Furni extends Component {
   render() {
     return (
-      <View>
-      <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>Furni</Title>
-                    </Body>
-                    <Right />
-                </Header>
-
-                <Content>
-                   <Text style={styles.intro}> Build the Look and Feel </Text>
-                   <Text style={styles.intro}> That You Want </Text> 
-                </Content>
-
-                <Footer>
-                    <FooterTab>
-                        <Button full>
-                            <Text>Footer</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
-            </Container>
-            </View>
+      <View style={[styles.background, styles.size, styles.flexCol]}>
+            <Header />
+            <Content />
+            <Footer />
+      </View>
     );
   }
 }
+class Content extends Component {
+  render() {
+    return (
+      <View style={[styles.contentFlex, styles.flexRow]}>
+        <Text style={styles.headerText}> Fook </Text>
+      </View>
+    );
+  }
+}
+class Header extends Component {
+  render() {
+    return (
+      <View style={[styles.header, styles.flexRow, styles.headerFlex]}>
+        <Text> FURNI </Text>
+        <Text> FURNI </Text>
+        <Text> FURNI </Text>
+      </View>
+    );
+  }
+}
+
+class Footer extends Component {
+  render() {
+    return (
+      <View style={[styles.header, styles.footerFlex]}>
+        <Text> Footer </Text>
+      </View>
+    );
+  }
+}
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -75,8 +75,44 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   background: {
-    backgroundColor: '#333333',
+    backgroundColor: 'grey',
+  },
+  size: {
+    width: '100%',
+    height: '100%'
+  },
+
+  header: {
+    width: '100%',
+    backgroundColor: "white",
+  },
+
+  footer: {
+    width: '100%',
+    backgroundColor: "white",
+  },
+
+  headerText: {
+    textAlign: "center",
+    fontSize: 18,
+  },
+  flexCol: {
+    flexDirection: 'column' 
+  }, 
+  flexRow: {
+    flexDirection: 'row' 
+  },
+  headerFlex: {
+    flex: 1,
+    alignItems: "center",
+  },
+  footerFlex: {
+    flex: 1,
+  },
+  contentFlex: {
+    flex: 10,
   }
+
 });
 
 AppRegistry.registerComponent('Furni', () => Furni);
