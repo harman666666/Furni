@@ -34,9 +34,15 @@ class Header extends Component {
   render() {
     return (
       <View style={[styles.header, styles.flexRow, styles.headerFlex]}>
-        <Text> FURNI </Text>
-        <Text> FURNI </Text>
-        <Text> FURNI </Text>
+        <View style={{flex:4}}> 
+          <Text> FURNI </Text>
+        </View> 
+        <View style={{flex:4}}>
+          <Text> FURNI </Text>
+        </View> 
+        <View style={{flex:4}}>
+          <Text> FURNI </Text>
+        </View> 
       </View>
     );
   }
