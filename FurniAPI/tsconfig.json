@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "target": "ES5",
+        "outDir": "./",
+        "rootDir": "./"
+    },
+      "include": [
+        "/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}

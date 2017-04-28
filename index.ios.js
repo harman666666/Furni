@@ -64,12 +64,25 @@ class CameraScreen extends Component {
     
   render() {
     return (
-      <ClearLayout>
-        <Text> Camera </Text>
-      </ClearLayout>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+        </Camera>
     );
   }
-}
+
+
+  takePicture() {
+    this.camera.capture()
+      .then((data) => console.log(data))
+      .catch(err => console.error(err));
+  }
+
+};
 
 class Content extends Component {
   static propTypes = {
@@ -128,7 +141,9 @@ class List extends Component {
       borderStyle: "solid",
       borderRadius: 12,
       borderWidth: 1,
-      height: "5%",
+      height: "15%",
+      marginTop: 1,
+      marginBottom: 1,
     },
   });
 
@@ -165,7 +180,7 @@ class ListItem extends Component {
 
 return (
     <View style={this.state.currentStyles} onTouchStart={this.touchStart} onTouchEnd={this.touchEnd} onTouchEnd={onPress}>
-      <Text style={{textAlign: "center", fontFamily: "Arial", top: "20%"}}>{text}</Text>
+      <Text style={{textAlign: "center", fontFamily: "Arial", top: "50%", transform: [ {translateY: 3} ]}}>{text}</Text>
     </View> 
 );
   }
@@ -312,6 +327,33 @@ const styles = StyleSheet.create({
     flex: 10,
     //alignItems: "center"
   },
+    container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
 });
+
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAUDib02pket0P1Cm4eR6VLdzAjVC7MyBc",
+    authDomain: "furni-39b87.firebaseapp.com",
+    databaseURL: "https://furni-39b87.firebaseio.com",
+    storageBucket: "furni-39b87.appspot.com",
+    messagingSenderId: "160705235972"
+  };
+  firebase.initializeApp(config);
 
 AppRegistry.registerComponent('Furni', () => App);
